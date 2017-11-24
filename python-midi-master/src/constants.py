@@ -17,7 +17,7 @@ NOTE_VALUE_MAP_SHARP = []
 
 for value in range( 128 ):
     noteidx = value % NOTE_PER_OCTAVE
-    octidx = value / OCTAVE_MAX_VALUE
+    octidx = value / NOTE_PER_OCTAVE
     name = NOTE_NAMES[noteidx]
     if len( name ) == 2:
         # sharp note
