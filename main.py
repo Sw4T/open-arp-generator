@@ -1,6 +1,7 @@
 import midi
 import random
 import constants
+from Tkinter import *
 
 # Instantiate a MIDI Pattern (contains a list of tracks)
 pattern = midi.Pattern()
@@ -20,16 +21,17 @@ NBTICK_FOR_A_SECOND = int(1 / TICK_IN_SECONDS)
 for i in range(0, 20):
 
 	start_tick = 0
-	on = midi.NoteOnEvent(tick=start_tick, velocity=30, pitch=midi.G_3)
+	on = midi.NoteOnEvent(tick=start_tick, velocity=100, pitch=midi.G_3)
 	track.append(on)
-	on = midi.NoteOnEvent(tick=start_tick, velocity=60, pitch=midi.G_2)
+	on = midi.NoteOnEvent(tick=start_tick, velocity=100, pitch=midi.A_2)
 	track.append(on)
 	
 	# Instantiate a MIDI note off event, append it to the track
 	start_tick = NBTICK_FOR_A_SECOND
-	off = midi.NoteOffEvent(tick=start_tick, pitch=midi.G_2)
-	track.append(off)
+
 	off = midi.NoteOffEvent(tick=start_tick, pitch=midi.G_3)	
+	track.append(off)
+	off = midi.NoteOffEvent(tick=start_tick, pitch=midi.A_2)	
 	track.append(off)
 
 # Add the end of track event, append it to the track
