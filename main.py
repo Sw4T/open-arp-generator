@@ -1,44 +1,22 @@
-import midi
 import random
 import constants
-from Tkinter import *
+import pretty_midi
 
-# Instantiate a MIDI Pattern (contains a list of tracks)
-pattern = midi.Pattern()
-pattern.resolution = 1000
-
-# Instantiate a MIDI Track (contains a list of MIDI events)
-track = midi.Track()
-# Append the track to the pattern
-pattern.append(track)
-
-# Instantiate a MIDI note on event, append it to the track
-
-TICK_IN_SECONDS = 0.0005
-NBTICK_FOR_A_SECOND = int(1 / TICK_IN_SECONDS)
-
-# Play a G_3 and a G_2 every second
-for i in range(0, 20):
-
-	start_tick = 0
-	on = midi.NoteOnEvent(tick=start_tick, velocity=100, pitch=midi.G_3)
-	track.append(on)
-	on = midi.NoteOnEvent(tick=start_tick, velocity=100, pitch=midi.A_2)
-	track.append(on)
-	
-	# Instantiate a MIDI note off event, append it to the track
-	start_tick = NBTICK_FOR_A_SECOND
-
-	off = midi.NoteOffEvent(tick=start_tick, pitch=midi.G_3)	
-	track.append(off)
-	off = midi.NoteOffEvent(tick=start_tick, pitch=midi.A_2)	
-	track.append(off)
-
-# Add the end of track event, append it to the track
-eot = midi.EndOfTrackEvent(tick=start_tick + 1)
-track.append(eot)
-# Print out the pattern
-print pattern
-
-# Save the pattern to disk
-midi.write_midifile("example.mid", pattern)
+# This is a simple example on how PrettyMIDI works
+# Create a PrettyMIDI object
+cello_c_chord = pretty_midi.PrettyMIDI()
+# Create an Instrument instance for a cello instrument
+cello_program = pretty_midi.instrument_name_to_program('Cello')
+cello = pretty_midi.Instrument(program=cello_program)
+# Iterate over note names, which will be converted to note number later
+for note_name in ['C5', 'E5', 'G5']:
+    # Retrieve the MIDI note number for this note name
+    note_number = pretty_midi.note_name_to_number(note_name)
+    # Create a Note instance for this note, starting at 0s and ending at .5s
+    note = pretty_midi.Note(velocity=100, pitch=note_number, start=0, end=1)
+    # Add it to our cello instrument
+    cello.notes.append(note)
+# Add the cello instrument to the PrettyMIDI object
+cello_c_chord.instruments.append(cello)
+# Write out the MIDI data
+cello_c_chord.write('cello-C-chord.mid')
