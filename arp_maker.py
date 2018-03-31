@@ -15,7 +15,7 @@ class ArpMaker(object):
         note_and_pitch = self.arp_properties.base_note + self.arp_properties.pitch
         list_major_scale = scales.get_major_scale(note_and_pitch)
         midi_sequence = self.get_random_midi_sequence(16, list_major_scale)
-        print(midi_sequence)
+        print("Generated MIDI sequence : " + ''.join(str(midi_sequence)))
 
         cello_program = pretty_midi.instrument_name_to_program('Cello')
         cello = pretty_midi.Instrument(program=cello_program)
@@ -25,7 +25,6 @@ class ArpMaker(object):
             note = pretty_midi.Note(velocity=100, pitch=note, start=time_in_seconds, end=time_in_seconds + 1)  # TODO True bpm
             cello.notes.append(note)
             time_in_seconds += 1
-            print(time_in_seconds)
 
         pm.instruments.append(cello)
         pm.write('example.mid')
@@ -34,10 +33,9 @@ class ArpMaker(object):
     def get_random_midi_sequence(self, nb_sequence, list_scale):
         midi_sequence = []
         random_matrix = matrix_random_walk(matrix.ALPHA_ONE_7_7, nb_sequence, 0, 0)
-        print(list_scale)
-        print(random_matrix)
-        for i in range(nb_sequence - 1):
-            # print("Random matrix[i] = " + str(random_matrix[i]) + "\nList scale[Random matrix[i] - 1] = " + str(list_scale[random_matrix[i] - 1]))
-            midi_sequence.append(list_scale[random_matrix[i - 1]])
+        print("Random path matrix : " + ''.join(str(random_matrix)))
+        print("MIDI major scale of " + (self.arp_properties.base_note + self.arp_properties.pitch) + " : " + ''.join(str(list_scale)))
+        for i in range(nb_sequence + 1):
+            midi_sequence.append(list_scale[random_matrix[i] - 1])
 
         return midi_sequence

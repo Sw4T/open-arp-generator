@@ -13,10 +13,9 @@ class ArpGeneratorWindow(object):
 
     def generate_arp(self):
         properties = ArpProperties(self.entry_bpm.get(), self.entry_base_note.get(), self.entry_pitch.get())
-        arp_maker = ArpMaker(properties)
-        random_seq = arp_maker.generate()
         print(properties.__dict__)
-        print(random_seq)
+        arp_maker = ArpMaker(properties)
+        arp_maker.generate()
 
     def draw(self):
         main_container_tk = Tk()
