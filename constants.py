@@ -1,5 +1,5 @@
 ##
-## Constants for MIDI okok
+## Constants for MIDI
 ##
 
 OCTAVE_MAX_VALUE = 12
