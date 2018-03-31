@@ -1,8 +1,6 @@
 import pretty_midi
 
-##
-## 
-##
+
 def get_major_scale(note_name):
 	note_number = pretty_midi.note_name_to_number(note_name)
 	list_note = []
@@ -14,6 +12,3 @@ def get_major_scale(note_name):
 	list_note.append(note_number + 9) 	# VI
 	list_note.append(note_number + 11) 	# VII
 	return list_note
-
-scale = get_major_scale('C2')
-print(scale)
