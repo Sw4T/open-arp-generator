@@ -1,5 +1,6 @@
 from Tkinter import *
 from arp_properties import *
+from arp_maker import *
 import constants
 
 
@@ -12,7 +13,10 @@ class ArpGeneratorWindow:
 
     def generate_arp(self):
         properties = ArpProperties(self.entry_bpm.get(), self.entry_base_note.get(), self.entry_pitch.get())
+        arp_maker = ArpMaker(properties)
+        random_seq = arp_maker.generate_random_sequence()
         print(properties.__dict__)
+        print(random_seq)
 
     def draw(self):
         main_container_tk = Tk()
@@ -33,8 +37,7 @@ class ArpGeneratorWindow:
 
         label_base_note = Label(layout_base_note, text="Base note (fundamental) : ")
         label_base_note.pack(side=LEFT)
-        base_note_value = "C"
-        self.entry_base_note = Entry(layout_base_note, textvariable=base_note_value, width=2)
+        self.entry_base_note = Entry(layout_base_note, width=2)
         self.entry_base_note.pack(side=RIGHT)
 
         # Base Note Pitch Layout
@@ -43,8 +46,7 @@ class ArpGeneratorWindow:
 
         label_pitch = Label(layout_pitch, text="Pitch (1 to 9) : ")
         label_pitch.pack(side=LEFT)
-        pitch_value = "3"
-        self.entry_pitch = Entry(layout_pitch, textvariable=pitch_value, width=2)
+        self.entry_pitch = Entry(layout_pitch, width=2)
         self.entry_pitch.pack(side=RIGHT)
 
         # Buttons
