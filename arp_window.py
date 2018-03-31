@@ -4,7 +4,7 @@ from arp_maker import *
 import constants
 
 
-class ArpGeneratorWindow:
+class ArpGeneratorWindow(object):
 
     def __init__(self):
         self.entry_bpm = None

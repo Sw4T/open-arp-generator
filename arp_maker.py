@@ -3,7 +3,7 @@ import arp_properties
 import scales
 
 
-class ArpMaker:
+class ArpMaker(object):
 
     def __init__(self, arp_props):
         self.arp_properties = arp_props

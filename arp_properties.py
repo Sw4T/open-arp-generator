@@ -1,4 +1,4 @@
-class ArpProperties:
+class ArpProperties(object):
 
     def __init__(self, bpm, base_note, pitch_value):
         self.bpm = bpm
