@@ -2,6 +2,7 @@ import pretty_midi
 import arp_properties
 import scales
 import matrix
+import constants
 from sequence_generator import *
 
 
@@ -13,7 +14,7 @@ class ArpMaker(object):
     def generate(self):
         pm = pretty_midi.PrettyMIDI(initial_tempo=float(self.arp_properties.bpm))
         note_and_pitch = self.arp_properties.base_note + self.arp_properties.pitch
-        list_major_scale = scales.get_major_scale(note_and_pitch)
+        list_major_scale = scales.get_scale(note_and_pitch, constants.MAJOR_SCALE)
         midi_sequence = self.get_random_midi_sequence(16, list_major_scale)
         print("Generated MIDI sequence : " + ''.join(str(midi_sequence)))
 

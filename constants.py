@@ -16,3 +16,11 @@ NOTE_VALUES = range(OCTAVE_MAX_VALUE * NOTE_PER_OCTAVE)
 ##
 
 VERSION_NUMBER = "0.1"
+
+##
+## Scales progression in semi-tones
+##
+
+MAJOR_SCALE = [2, 4, 5, 7, 9, 11]
+MINOR_SCALE = [2, 3, 5, 7, 8, 10]
+
